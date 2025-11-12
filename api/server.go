@@ -1,21 +1,20 @@
 package api
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 
+	"github.com/YosaZiege/banksystem/api/handler"
+	"github.com/YosaZiege/banksystem/config"
 	db "github.com/YosaZiege/banksystem/internal/db/sqlc"
-	"github.com/YosaZiege/banksystem/internal/util"
 )
 
 type Server struct {
 	queries *db.Queries
-	config  util.Config
+	config  config.Config
 	router  *gin.Engine
 }
 
-func NewServer(config util.Config, queries *db.Queries) (*Server, error) {
+func NewServer(config config.Config, queries *db.Queries) (*Server, error) {
 	server := &Server{
 		config:  config,
 		queries: queries,
@@ -37,4 +36,3 @@ func (s *Server) Start(address string) error {
 func errorResponse(err error) gin.H {
 	return gin.H{"error": err.Error()}
 }
-

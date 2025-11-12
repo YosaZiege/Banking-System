@@ -5,7 +5,8 @@
 
 
 
-
+migrateup:
+	migrate -path internal/db/migration  -database "postgresql://root:root@localhost:5432/bank-database?sslmode=disable" -verbose up
 
 createdb: 
 		sudo docker exec -it bank-container createdb --username=root bank-database 
@@ -17,4 +18,4 @@ stop:
 		sudo docker stop bank-container 
 dropdb:
 	sudo docker exec -it bank-container dropdb --username=root bank-database 
-.PHONY: createdb dropdb postgres 
+.PHONY: createdb dropdb postgres migrateup

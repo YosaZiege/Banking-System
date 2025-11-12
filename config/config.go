@@ -9,13 +9,13 @@ import (
 type Config struct {
 	ServerAddress string `mapstructure:"SERVER_ADDRESS"`
 	DBSource      string `mapstructure:"DB_SOURCE"`
+	DBDriver      string `mapstructure:"DB_DRIVER"`
 }
 
 func LoadConfig(path string) (Config, error) {
 	var config Config
-
 	viper.AddConfigPath(path)
-	viper.SetConfigFile(".env")
+	viper.SetConfigName(".env.local")
 	viper.SetConfigType("env")
 
 	viper.AutomaticEnv()
